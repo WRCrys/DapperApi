@@ -13,9 +13,9 @@ namespace DapperApi.Controllers
     [ApiController]
     public class ProdutoController : Controller
     {
-        ProdutoService _produto;
+        IProdutoService _produto;
 
-        public ProdutoController(ProdutoService service)
+        public ProdutoController(IProdutoService service)
         {
             _produto = service;
                 
