@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DapperApi.Interface;
 using DapperApi.Repository;
+using DapperApi.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,8 +28,9 @@ namespace DapperApi
         {
             services.AddControllersWithViews();
 
-            //Inje�ao de dependencia
-            services.AddScoped<ProdutoInterface, ProdutoRepository>();
+            //Injeção de dependencia
+            services.AddScoped<IProduto, ProdutoRepository>();
+            services.AddScoped<IProdutoService, ProdutoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

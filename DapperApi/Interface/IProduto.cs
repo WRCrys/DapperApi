@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DapperApi.Interface
 {
-    public interface ProdutoInterface
+    public interface IProduto
     {
-        Task<int> Adicionar(Produto produto);
         Task <IEnumerable<Produto>> ObterTodos();
         Task<Produto> GetProduto(int id);
-        Task<int> Update(Produto produto);
-        Task<int> Delete(int id);
+        Task Adicionar(Produto produto);
+        Task Update(Produto produto);
+        Task Delete(int id);
     }
 }

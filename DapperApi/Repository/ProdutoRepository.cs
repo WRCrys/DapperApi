@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DapperApi.Repository
 {
-    public class ProdutoRepository : ProdutoInterface
+    public class ProdutoRepository : IProduto
     {
         IConfiguration _configuration;
 
@@ -32,21 +32,21 @@ namespace DapperApi.Repository
 
             using (var con = new SqlConnection(connectionString))
             {
+                var trans = con.BeginTransaction();
+                IEnumerable<Produto> result;
                 try
                 {
-                    con.Open();
                     var sql = "SELECT * FROM Produtos";
-                    var result = await con.QueryAsync<Produto>(sql);
-                    return result.ToList();
+                    result = await con.QueryAsync<Produto>(sql, null, trans);
+                    trans.Commit();
+
                 }
                 catch (Exception error)
                 {
+                    trans.Rollback();
                     throw error;
                 }
-                finally
-                {
-                    con.Close();
-                }
+                return result.ToList();
 
             }
         }
@@ -77,19 +77,21 @@ namespace DapperApi.Repository
             }
         }
 
-        public async Task<int> Adicionar(Produto produto)
+        public async Task Adicionar(Produto produto)
         {
             var connectionString = this.GetConnection();
-            int count = 0;
             using (var con = new SqlConnection(connectionString))
             {
+
                 try
                 {
                     con.Open();
-                    var sql = "INSERT INTO Produtos (Nome, Estoque, Preco) VALUES (@Nome, @Estoque, @Preco);" +
-                        "SELECT CAST (SCOPE_IDENTITY() AS INT);";
-                    count = await con.ExecuteAsync(sql, produto);
-                    
+                    var sql = @"
+                        INSERT INTO Produtos (Nome, Estoque, Preco)
+                        VALUES (@Nome, @Estoque, @Preco);
+                    ";
+                    await con.ExecuteAsync(sql, produto);
+
                 }
                 catch (Exception error)
                 {
@@ -99,22 +101,20 @@ namespace DapperApi.Repository
                 {
                     con.Close();
                 }
-                return count;
 
             }
         }
 
-        public async Task<int> Update(Produto produto)
+        public async Task Update(Produto produto)
         {
             var connectionString = this.GetConnection();
-            var count = 0;
             using (var con = new SqlConnection(connectionString))
             {
                 try
                 {
                     con.Open();
                     var sql = "UPDATE Produtos SET Name = @Nome, Estoque = @Estoque, Preco = @Preco WHERE ProdutoId = " + produto.ProdutoId;
-                    count = await con.ExecuteAsync(sql, produto);
+                    await con.ExecuteAsync(sql, produto);
                 }
                 catch (Exception error)
                 {
@@ -125,22 +125,21 @@ namespace DapperApi.Repository
                     con.Close();
                 }
 
-                return count;
+
             }
 
         }
 
-        public async Task<int> Delete(int id)
+        public async Task Delete(int id)
         {
             var connectionString = this.GetConnection();
-            var count = 0;
             using (var con = new SqlConnection(connectionString))
             {
                 try
                 {
                     con.Open();
                     var sql = "DELETE FROM Produtos WHERE ProdutoId = " + id;
-                    count = await con.ExecuteAsync(sql);
+                    await con.ExecuteAsync(sql);
                 }
                 catch (Exception error)
                 {
@@ -151,7 +150,7 @@ namespace DapperApi.Repository
                     con.Close();
                 }
 
-                return count;
+
             }
         }
     }

@@ -14,10 +14,32 @@ namespace DapperApi.Controllers
     public class ProdutoController : Controller
     {
         ProdutoService _produto;
+
+        public ProdutoController(ProdutoService service)
+        {
+            _produto = service;
+                
+        }
         public IActionResult Index()
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult<Produto> Produto()
+        {
+            try
+            {
+                var produtos = _produto.ObterTodos();
+                return Ok(produtos);
+            }
+            catch (Exception error)
+            {
+                return BadRequest($"{ error.Message } - { error.InnerException?.Message }");
+            }
+
+        }
+
         [HttpGet("{id}")]
         public ActionResult<Produto> ObterProduto(int id)
         {
@@ -27,14 +49,50 @@ namespace DapperApi.Controllers
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok(produto);
         }
 
-        public ActionResult<Produto> Adicionar(Produto produto)
+        [HttpPost]
+        public async Task<ActionResult<Produto>> Adicionar(Produto produto)
         {
-            var result = _produto.Adicionar(produto);
+            try
+            {
+                await _produto.Adicionar(produto);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                //o ponto de interrogação é parar quando o InnerException for nulo
+                return BadRequest($"{ e.Message } - { e.InnerException?.Message }");
+            }
+        }
 
-            if(result > 1)
+        [HttpPut]
+        public async Task<ActionResult> Atualizar(Produto produto)
+        {
+            try
+            {
+                await _produto.Update(produto);
+                return Ok();
+            }
+            catch (Exception error)
+            {
+                return BadRequest($"{ error.Message } - { error.InnerException?.Message }");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Deletar(int id)
+        {
+            try
+            {
+                await _produto.Delete(id);
+                return Ok();
+            }
+            catch (Exception error)
+            {
+                return BadRequest($"{ error.Message } - { error.InnerException?.Message}");
+            }
         }
     }
 }

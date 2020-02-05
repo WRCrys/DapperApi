@@ -8,29 +8,41 @@ using System.Threading.Tasks;
 
 namespace DapperApi.Service
 {
-    public class ProdutoService
+    public class ProdutoService : IProdutoService
     {
-        ProdutoInterface _produto;
+        IProduto repository;
+
+        public ProdutoService(IProduto repository)
+        {
+            this.repository = repository;
+        }
 
         public Task ObterProduto(int id)
         {
-            var result = _produto.GetProduto(id);
+            var result = repository.GetProduto(id);
 
             return result;
         }
 
-        public Task<IEnumerable<Produto>> ObterTodos()
+        public async Task<IEnumerable<Produto>> ObterTodos()
         {
-            var result = _produto.ObterTodos();
-
-            return result;
+            return await repository.ObterTodos();
         }
 
-        public Task<int> Adicionar(Produto produto)
+        public async Task Adicionar(Produto produto)
         {
-            var result = _produto.Adicionar(produto);
+            await repository.Adicionar(produto);
+        }
 
-            return result;
+        public async Task Update(Produto produto)
+        {
+            await repository.Update(produto);
+
+        }
+
+        public async Task Delete(int id)
+        {
+            await repository.Delete(id);
         }
     }
 }
