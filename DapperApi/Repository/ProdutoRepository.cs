@@ -21,7 +21,7 @@ namespace DapperApi.Repository
 
         public string GetConnection()
         {
-            var connection = _configuration.GetSection("ConnectionStrings").GetSection("DapperConnection").Value;
+            var connection = _configuration.GetSection("ConnectionStrings").GetSection("DapperConnectionPagueMenos").Value;
             return connection;
         }
 
@@ -32,18 +32,15 @@ namespace DapperApi.Repository
 
             using (var con = new SqlConnection(connectionString))
             {
-                var trans = con.BeginTransaction();
                 IEnumerable<Produto> result;
                 try
                 {
                     var sql = "SELECT * FROM Produtos";
-                    result = await con.QueryAsync<Produto>(sql, null, trans);
-                    trans.Commit();
+                    result = await con.QueryAsync<Produto>(sql);
 
                 }
                 catch (Exception error)
                 {
-                    trans.Rollback();
                     throw error;
                 }
                 return result.ToList();

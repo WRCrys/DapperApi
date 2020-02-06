@@ -58,7 +58,8 @@ namespace DapperApi.Controllers
             try
             {
                 await _produto.Adicionar(produto);
-                return Ok();
+                //Status code Created
+                return StatusCode(201);
             }
             catch (Exception e)
             {
