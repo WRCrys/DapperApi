@@ -21,7 +21,7 @@ namespace DapperApi.Repository
 
         public string GetConnection()
         {
-            var connection = _configuration.GetSection("ConnectionStrings").GetSection("DapperConnectionPagueMenos").Value;
+            var connection = _configuration.GetSection("ConnectionStrings").GetSection("DapperConnection").Value;
             return connection;
         }
 

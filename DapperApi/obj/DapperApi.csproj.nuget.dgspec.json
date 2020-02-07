@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\1008218\\Documents\\Crystyano\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\DapperApi.csproj": {}
+    "D:\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\DapperApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\1008218\\Documents\\Crystyano\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\DapperApi.csproj": {
+    "D:\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\DapperApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\1008218\\Documents\\Crystyano\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\DapperApi.csproj",
+        "projectUniqueName": "D:\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\DapperApi.csproj",
         "projectName": "DapperApi",
-        "projectPath": "C:\\Users\\1008218\\Documents\\Crystyano\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\DapperApi.csproj",
-        "packagesPath": "C:\\Users\\1008218\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\1008218\\Documents\\Crystyano\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\obj\\",
+        "projectPath": "D:\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\DapperApi.csproj",
+        "packagesPath": "C:\\Users\\cryst\\.nuget\\packages\\",
+        "outputPath": "D:\\Desenvolvimento\\ASP.NET\\DapperApi\\DapperApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\1008218\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cryst\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://nexusdev.pmenos.com.br:8081/repository/nuget01/": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -79,16 +75,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.0.1, 3.0.1]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.0.2, 3.0.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -97,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

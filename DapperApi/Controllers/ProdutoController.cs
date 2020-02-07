@@ -31,7 +31,7 @@ namespace DapperApi.Controllers
             try
             {
                 var produtos = _produto.ObterTodos();
-                return Ok(produtos);
+                return Json(produtos.Result);
             }
             catch (Exception error)
             {
@@ -49,7 +49,7 @@ namespace DapperApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(produto);
+            return Json(produto);
         }
 
         [HttpPost]
