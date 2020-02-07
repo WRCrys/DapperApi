@@ -59,8 +59,8 @@ namespace DapperApi.Repository
                 {
                     con.Open();
                     var sql = "SELECT * FROM Produtos WHERE ProdutoId = @ID";
-                    var result = await con.QueryAsync<Produto>(sql, new { ID = id });
-                    return result.FirstOrDefault();
+                    await con.QueryAsync<Produto>(sql, new { ID = id });
+                    // return result.FirstOrDefault();
                 }
                 catch (Exception error)
                 {
@@ -70,6 +70,7 @@ namespace DapperApi.Repository
                 {
                     con.Close();
                 }
+                return con.FirstOrDefault();
 
             }
         }
