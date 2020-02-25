@@ -2,6 +2,7 @@ using Dapper;
 using DapperApi.Interface;
 using DapperApi.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -11,18 +12,12 @@ using System.Threading.Tasks;
 
 namespace DapperApi.Data
 {
-    public class DataConfig
+    public static class DataConfig
     {
-        IConfiguration _configuration;
 
-        public DataConfig(IConfiguration configuration)
+        public static string GetConnection(IConfiguration configuration)
         {
-            _configuration = configuration;
-        }
-
-        public string GetConnection()
-        {
-            var connection = _configuration.GetSection("ConnectionStrings").GetSection("DapperConnection").Value;
+            var connection = configuration.GetSection("ConnectionStrings").GetSection("DapperConnection").Value;
             return connection;
         }
 
